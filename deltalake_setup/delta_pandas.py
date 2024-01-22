@@ -4,7 +4,10 @@ from duckdb import connect
 
 class DeltaPandasHandler:
     def __init__(self):
-        pass
+        # Define o número máximo de linhas e colunas a serem exibidas como None
+        pd.set_option('display.max_rows', None)
+        pd.set_option('display.max_columns', None)
+
 
     def read_csv(self, file_path, **kwargs):
         """
@@ -29,5 +32,5 @@ class DeltaPandasHandler:
         con.close()
         return result
     
-    def writer(self,file_path:str, **kwargs ):
+    def write_deltalake(self,file_path:str, **kwargs ):
         deltalake.write_deltalake(table_or_uri=file_path, **kwargs)
